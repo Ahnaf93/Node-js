@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>First server</title>
+</head>
+<body>
+    <h1> New Article</h1>
+    <label >Title</label>
+    <input type="text" placeholder="title"><br/>
+    <label >Content</label>
+    <input id="Content" type="text" placeholder="content"><br/>
+    <button id="submit">Submit</button>
+
+
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script>
+  $("#submit").click(function(event){
+        var article={
+            title: $('#title').val(),
+            content: $('#content').val()
+        }
+        $.ajax({
+            url: "/article/new",
+            method: "POST",
+            data: article
+        }).done(function(response){
+            console.log(response)
+        }).fail(function(response){
+            console.log(response)
+        })
+  })
+  </script>
+</body>
+</html>
