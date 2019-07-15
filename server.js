@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({extended:true}))
   })
 
   
-  //Send article.ejs file on console
+  //8d: Send article.ejs file on console 
   app.get('/article', function(req, res){
     res.render('article.ejs',{article: dummyArticle})
   })
