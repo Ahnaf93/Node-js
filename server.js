@@ -5,8 +5,16 @@ var app = express ();
 //var fs = require('fs');
 var server = http.Server(app)
 var bodyParser=require('body-parser');
+
+var dummyArticle={
+  title:"Test article from server",
+  Content:"Test content from article"
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}))
+
+
 //(8a)
   // var server = http.createServer(function(req, res){
   //   res.statusCode = 200;
@@ -25,6 +33,12 @@ app.use(bodyParser.urlencoded({extended:true}))
 //8c                                                                                                                   
   app.get('/form', function(req, res){
     res.sendFile(__dirname+'/form.html')
+  })
+
+  
+  //Send article.ejs file on console
+  app.get('/article', function(req, res){
+    res.render('article.ejs',{article: dummyArticle})
   })
 
 
