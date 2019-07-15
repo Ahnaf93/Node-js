@@ -5,6 +5,21 @@ var app = express ();
 //var fs = require('fs');
 var server = http.Server(app)
 var bodyParser=require('body-parser');
+var mongo=require('mongodb')
+
+var db_url= "mongodb://localhost:27017"
+
+mongo.MongoClient.connect(db_url, {useNewUrlParser:true},function(err, client){
+
+        if(err){
+          console.log("could not connect to DB")
+        }
+        else{
+          db= client.db('node-cW9')
+        }
+      
+
+})
 
 var dummyArticle={
   title:"Test article from server",
@@ -53,9 +68,16 @@ app.use(bodyParser.urlencoded({extended:true}))
     res.sendFile(__dirname+'/second.html')
   })
 
-  //8c
+  //8c & 9a(store inputed data from html page into mongodb server)
   app.post('/article/new', function(req,res){
     console.log(req.body)
+    db.createCollection('article', function(err, collection){
+      console.log(collection)
+    })
+
+    var collection=db.collection('articles')
+    collection.save(req.body)
+
     res.send({message:"data received"})
   })
   server.listen(3000, 'localhost', function(){

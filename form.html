@@ -21,7 +21,8 @@
   $("#submit").click(function(event){
         var article={
             title: $('#title').val(),
-            content: $('#content').val()
+            content: $('#content').val(),
+            error:"error"
         }
         $.ajax({
             url: "/article/new",
